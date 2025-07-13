@@ -6,8 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'alx_backend_graphql_crm.settings')
-    print("Setting DJANGO_SETTINGS_MODULE to:", os.environ['DJANGO_SETTINGS_MODULE'])
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'crm.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

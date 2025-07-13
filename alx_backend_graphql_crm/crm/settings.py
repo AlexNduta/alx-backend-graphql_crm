@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-from celery.schedules import crontab
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,7 +40,6 @@ INSTALLED_APPS = [
     'graphene_django', 
     'crm',
     'django_crontab',  # For cron jobs
-    'django_celery_beat',  # For periodic tasks
 ]
 
 MIDDLEWARE = [
@@ -134,12 +131,4 @@ GRAPHENE = {
 CRONJOBS = [
     ('*/5 * * * *', 'crm.cron.log_crm_heartbeat'),
    ('0 8 * * *', 'crm.cron.send_order_reminders'),
-   ('0 */12 * * *', 'crm.cron.update_low_stock'),
 ]
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_BEAT_SCHEDULE = {
-    'generate-crm-report': {
-        'task': 'crm.tasks.generate_crm_report',
-        'schedule': crontab(day_of_week='mon', hour=6, minute=0),
-    },
-}

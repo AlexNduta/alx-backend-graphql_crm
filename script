@@ -1,0 +1,17 @@
+#!/bin/bash
+# Navigate to the crm folder first
+cd crm
+
+# Find and confirm the presence of the files
+echo "Checking for required files..."
+find . -name "schema.py" -o -name "cron.py" -o -name "settings.py"
+
+# Check for the presence of the required class/function/definition
+echo -e "\nChecking contents of schema.py..."
+grep -q "class UpdateLowStockProducts" schema.py && echo "Found UpdateLowStockProducts class in schema.py" || echo "UpdateLowStockProducts class NOT found in schema.py"
+
+echo -e "\nChecking contents of cron.py..."
+grep -q "def update_low_stock" cron.py && echo "Found update_low_stock function in cron.py" || echo "update_low_stock function NOT found in cron.py"
+
+echo -e "\nChecking contents of settings.py..."
+grep -q "CRONJOBS" settings.py && echo "Found CRONJOBS definition in settings.py" || echo "CRONJOBS definition NOT found in settings.py"
